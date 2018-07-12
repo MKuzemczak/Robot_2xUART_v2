@@ -1,0 +1,5 @@
+VisualGDB/Debug/startup_stm32f411xe.o: \
+ C:/Users/MICHAK~1/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/STM32F4xxxx/StartupFiles/startup_stm32f411xe.c \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\lib\gcc\arm-none-eabi\7.3.1\include\stddef.h
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\lib\gcc\arm-none-eabi\7.3.1\include\stddef.h:

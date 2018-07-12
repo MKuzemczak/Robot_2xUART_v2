@@ -1,0 +1,150 @@
+VisualGDB/Debug/Vector3D.o: Vector3D.cpp Vector3D.h \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\vector \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\stl_algobase.h \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\arm-none-eabi\thumb\v7e-m\fpv4-sp\hard\bits\c++config.h \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\arm-none-eabi\thumb\v7e-m\fpv4-sp\hard\bits\os_defines.h \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\arm-none-eabi\thumb\v7e-m\fpv4-sp\hard\bits\cpu_defines.h \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\functexcept.h \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\exception_defines.h \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\cpp_type_traits.h \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\ext\type_traits.h \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\ext\numeric_traits.h \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\stl_pair.h \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\move.h \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\concept_check.h \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\type_traits \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\stl_iterator_base_types.h \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\stl_iterator_base_funcs.h \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\debug\assertions.h \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\stl_iterator.h \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\ptr_traits.h \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\debug\debug.h \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\predefined_ops.h \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\allocator.h \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\arm-none-eabi\thumb\v7e-m\fpv4-sp\hard\bits\c++allocator.h \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\ext\new_allocator.h \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\new \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\exception \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\exception.h \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\exception_ptr.h \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\cxxabi_init_exception.h \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\lib\gcc\arm-none-eabi\7.3.1\include\stddef.h \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\typeinfo \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\hash_bytes.h \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\nested_exception.h \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\memoryfwd.h \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\stl_construct.h \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\ext\alloc_traits.h \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\alloc_traits.h \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\stl_uninitialized.h \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\stl_vector.h \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\initializer_list \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\stl_bvector.h \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\functional_hash.h \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\range_access.h \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\vector.tcc \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\list \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\stl_list.h \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\allocated_ptr.h \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\ext\aligned_buffer.h \
+ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\list.tcc
+
+Vector3D.h:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\vector:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\stl_algobase.h:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\arm-none-eabi\thumb\v7e-m\fpv4-sp\hard\bits\c++config.h:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\arm-none-eabi\thumb\v7e-m\fpv4-sp\hard\bits\os_defines.h:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\arm-none-eabi\thumb\v7e-m\fpv4-sp\hard\bits\cpu_defines.h:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\functexcept.h:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\exception_defines.h:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\cpp_type_traits.h:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\ext\type_traits.h:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\ext\numeric_traits.h:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\stl_pair.h:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\move.h:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\concept_check.h:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\type_traits:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\stl_iterator_base_types.h:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\stl_iterator_base_funcs.h:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\debug\assertions.h:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\stl_iterator.h:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\ptr_traits.h:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\debug\debug.h:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\predefined_ops.h:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\allocator.h:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\arm-none-eabi\thumb\v7e-m\fpv4-sp\hard\bits\c++allocator.h:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\ext\new_allocator.h:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\new:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\exception:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\exception.h:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\exception_ptr.h:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\cxxabi_init_exception.h:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\lib\gcc\arm-none-eabi\7.3.1\include\stddef.h:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\typeinfo:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\hash_bytes.h:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\nested_exception.h:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\memoryfwd.h:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\stl_construct.h:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\ext\alloc_traits.h:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\alloc_traits.h:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\stl_uninitialized.h:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\stl_vector.h:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\initializer_list:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\stl_bvector.h:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\functional_hash.h:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\range_access.h:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\vector.tcc:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\list:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\stl_list.h:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\allocated_ptr.h:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\ext\aligned_buffer.h:
+
+c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\7\ 2018-q2-update\arm-none-eabi\include\c++\7.3.1\bits\list.tcc:
