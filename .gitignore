@@ -327,3 +327,13 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder
 .mfractor/
+
+# VisualGDB files
+*.vgdbsettings
+*.props
+*.xml
+Drivers/
+VisualGDB/
+
+# Eigen linear algebra library
+EigenLib/
