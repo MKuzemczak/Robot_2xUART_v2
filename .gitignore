@@ -329,7 +329,7 @@ ASALocalRun/
 .mfractor/
 
 # VisualGDB files
-*.vgdbsettings
+*.vgdbsettings.*
 *.props
 *.xml
 Drivers/
@@ -337,3 +337,6 @@ VisualGDB/
 
 # Eigen linear algebra library
 EigenLib/
+
+# Other VS
+*.vcxproj.*
