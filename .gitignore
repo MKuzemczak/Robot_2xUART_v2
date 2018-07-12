@@ -340,3 +340,4 @@ EigenLib/
 
 # Other VS
 *.vcxproj.*
+*.ioc
