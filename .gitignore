@@ -329,7 +329,7 @@ ASALocalRun/
 .mfractor/
 
 # VisualGDB files
-*.vgdbsettings.*
+*.vgdbsettings*
 *.props
 *.xml
 Drivers/
@@ -339,5 +339,8 @@ VisualGDB/
 EigenLib/
 
 # Other VS
-*.vcxproj.*
+*.vcxproj*
 *.ioc
+
+# CubeMX export project
+*.gpdsc
