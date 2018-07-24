@@ -1,22 +1,28 @@
 #pragma once
+
 #include "EigenAddons.h"
+#include "uartCom.h"
+
+#define ERR_NO_LENGTH 1
 
 class Joint
 {
-	double alpha; // kat alfa - miedzy poprzednim Z a tym tutaj.
-	double Theta; // kat Theta - miedzy poprzednim X a tym tutaj.
-	double length; // dlugosc l - miedzy poprzednim Z a tym tutaj
+	double alpha; // kat alfa - wokol tego X, miedzy poprzednim Z a tym tutaj.
+	double Theta; // kat Theta - wokol tego Z
+	double aLength; // dlugosc a - wzdluz tego x
+	double dLength; // d³ugoœæ d - wzdluz poprzedniego z
 	Eigen::Matrix4d DHmatrix; // macierz DH transformacji punktu w tym ukladzie do poprzedniego ukladu
 	Eigen::Vector3d locationInGlobal,  // wektor polozenia przegubu w globalnym ukladzie
 		ZaxisInGlobal;
 	
 public:
-	Joint(double a, double T, double l);
+	Joint();
+	Joint(double a, double al, double dl);
 	
 	void setAlpha(double a)
 	{
 		alpha = a;
-		updateDHmatrix();
+			
 	}
 	
 	double getAlpha()
@@ -28,7 +34,6 @@ public:
 	void setTheta(double T)
 	{
 		Theta = T;
-		updateDHmatrix();
 	}
 	
 	double getTheta()
@@ -36,15 +41,24 @@ public:
 		return Theta;
 	}
 	
-	void setLength(double l)
+	void setaLength(double l)
 	{
-		length = l;
-		updateDHmatrix();
+		aLength = l;
 	}
 	
-	double getLength()
+	double getaLength()
 	{
-		return length;
+		return aLength;
+	}
+	
+	void setdLength(double l)
+	{
+		dLength = l;
+	}
+	
+	double getdLength()
+	{
+		return dLength;
 	}
 	
 	void setLocation(Eigen::Vector3d & v)
@@ -72,8 +86,6 @@ public:
 		return DHmatrix;
 	}
 	
-	// aktualizuj macierz DH
-	void updateDHmatrix();
 	
 	~Joint();
 };

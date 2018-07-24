@@ -1,23 +1,53 @@
-#pragma once
+#pragma once	
 
 #include <vector>
+
+#include "Lista.h"
 
 #include "Joint.h"
 
 class Robot
 {
-	std::vector<Joint> regJoints,
+	Lista<Joint> regJoints,
 		locJoints;// lista przegubów
 	// pomys³: rozdzelone na regionalne i lokalne
-	Eigen::Vector3d TCPloc;// polozenie TCP
+	
+	Lista<Joint*> joints;
+	
+	Joint TCP;// polozenie TCP
 	int DOF;// liczba DOF
+	
+	// aktualne rozwarcie chwytaka
+	// lista punktow	
 public:
 	Robot();
 	
-	void addRegJoint(double a, double T, double l);
-	void addLocJoint(double a, double T, double l);
+	void addRegJoint(double a, double al, double dl);
+	void addLocJoint(double a, double l, double dl);
 	
+	void updateDHmatrices();
 	void updateDHvectors();
+	
+	
+	Eigen::Vector3d & getTCPlocation()
+	{
+		return TCP.getLocation();
+	}
+	
+	void setThetaDeg(int joint, double theta);
+	void setThetaRad(int joint, double theta);
+	
+	void setTCPaLength(double l)
+	{
+		TCP.setaLength(l); 
+		
+		updateDHmatrices();
+		updateDHvectors();
+	}
+	
+	Eigen::Vector3d & getJointLocation(int joint);
+	Eigen::Matrix4d & getJointDHmatrix(int joint);
+	Eigen::Vector3d & getJointZinGlobal(int joint);
 	
 	~Robot();
 };
