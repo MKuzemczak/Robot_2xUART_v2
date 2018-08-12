@@ -88,7 +88,7 @@ void Robot::updateDHvectors()
 	{
 		m *= joints[i]->getDHmatrix();
 		
-		//pcPort << m << '\n'; // debug
+		//pcPort << "Przemnazana macierz nr " << i << ":\n" << m << '\n'; // debug
 		
 		v << m(0, 3), m(1, 3), m(2, 3);
 			
@@ -100,10 +100,45 @@ void Robot::updateDHvectors()
 		Z = (m * Z).eval();
 		
 		v << Z(0), Z(1), Z(2); 
+		v -= joints[i]->getLocation();
+		
 		joints[i]->setZinGlobal(v);
+		
+		//pcPort << "Joint " << i << " Z:\n" << joints[i]->getZinGlobal() << '\n'; // debug
 	}
 }
 	
+
+bool Robot::jacobian(Eigen::MatrixXd & jacobM, Lista<Joint> & joints, Eigen::Vector3d & setPoint)
+{
+	if (joints.size() != jacobM.cols()) 
+	{
+		pcPort << "jacobian: ilosc przegubow i ilosc kolumn w macierzy jakobianowej nie sa sobie rowne!\n";
+		pcPort << "Przeguby: " << (int)joints.size() << ", kolumny: " << jacobM.cols() << '\n';
+		return false;
+	}
+	
+	if (jacobM.rows() != 3)
+	{
+		pcPort << "Macierz jakobiego nie sklada sie z trzech wierszy (z wektorow 3D)!\n";
+		pcPort << "jacobM.cols(): " << jacobM.cols() << '\n';
+		return false;
+	}
+	
+	Eigen::Vector3d jToP,  // vector pointing from currently processed joint to setPoint
+					dJToP; // rotation around Z derivative - change of jToP vector
+	
+	int loops = joints.size();
+	
+	for (int i = 0; i < loops; i++)
+	{
+		jToP = setPoint - joints[i].getLocation();
+		dJToP = joints[i].getZinGlobal().cross(jToP);
+		jacobM.col(i)	 = dJToP;
+	}
+	
+	return true;
+}
 
 void Robot::setThetaDeg(int joint, double theta)
 {

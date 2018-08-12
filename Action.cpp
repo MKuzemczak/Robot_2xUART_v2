@@ -24,7 +24,7 @@ void StraightLineMovAction::calculate()
 	
 	lerp(path);
 	
-	
+	 
 }
 
 void StraightLineMovAction::lerp(Lista<Eigen::Vector3d> & path)

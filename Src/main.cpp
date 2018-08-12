@@ -118,16 +118,16 @@ int main(void)
 	{
 		if (flags.isSet(PC_SAVE_RCV_VAL))
 		{
-			/*MatrixXd m0(2,2), m1(2,2);
+			MatrixXd m0(2,2), m1(2,2);
 			MatrixXd m2(3,4), m3;
 			m0 << 1, 2,
 				-3, 11;
 			m1 << -5, 12,
 				10, 13;
 			
-			m2 << 1, 2, 3, 4,
-				5, 6, 7, 8,
-				0, 0, 0, 0;
+			m2 << 1, 0, 3, 4,
+				0, 0, 0, 0,
+				123, 0, 117, 8;
 			
 			
 			pcPort << m0 << "\n" << m1 << "\n" << m2 << "\n";
@@ -142,8 +142,8 @@ int main(void)
 			
 			//pcPort << m0(0, 0) << "  " << m0(0, 1) << "\n" << m0(1, 0) << "  " << m0(1, 1) << "\n";
 			//pcPort << m1(0, 0) << "  " << m1(0, 1) << "\n" << m1(1, 0) << "  " << m1(1, 1) << "\n";
-			*/
 			
+			/*
 			Robot r;
 			
 			r.addRegJoint(-90,  0, 0);
@@ -153,12 +153,13 @@ int main(void)
 			r.addLocJoint(-90, 0, 50);
 			r.setTCPaLength(20);
 			
+			//r.setThetaDeg(3, 30); // test reakcji na ustawienie k¹ta theta - dzia³a
 			
 			//for (int i = 0; i < 6; i++)
 				//pcPort << r.getJointZinGlobal(i) << '\n';
 			
-			pcPort << r.getTCPlocation();
-			
+			pcPort << "Polozenie TCP:\n" << r.getTCPlocation();
+			**/
 			pcPort << "Odebrane: " << pcPort.getBuffer()->toInt() << '\n';
 			flags.reset(PC_SAVE_RCV_VAL);
 			pcPort.getBuffer()->clear();

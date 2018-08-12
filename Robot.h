@@ -21,12 +21,11 @@ class Robot
 	// lista punktow	
 public:
 	Robot();
+	~Robot();
+
 	
 	void addRegJoint(double a, double al, double dl);
 	void addLocJoint(double a, double l, double dl);
-	
-	void updateDHmatrices();
-	void updateDHvectors();
 	
 	
 	Eigen::Vector3d & getTCPlocation()
@@ -49,6 +48,10 @@ public:
 	Eigen::Matrix4d & getJointDHmatrix(int joint);
 	Eigen::Vector3d & getJointZinGlobal(int joint);
 	
-	~Robot();
+	void updateDHmatrices();
+	void updateDHvectors();
+	bool jacobian(Eigen::MatrixXd & jacobM, Lista<Joint> & joints, Eigen::Vector3d & setPoint);	
+	bool jacobAlgStep();
+	
 };
 

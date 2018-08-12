@@ -7,7 +7,7 @@
     <Revision>1</Revision>
   </ToolchainVersion>
   <BspID>com.sysprogs.arm.stm32</BspID>
-  <BspVersion>4.7</BspVersion>
+  <BspVersion>4.7R3</BspVersion>
   <McuID>STM32F411RE</McuID>
   <MCUDefinitionFile>STM32F4xxxx/DeviceDefinitions/stm32f411xe.xml</MCUDefinitionFile>
   <MCUProperties>
