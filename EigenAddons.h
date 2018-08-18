@@ -9,6 +9,7 @@
 
 #define SMALLEST 0.0000000001
 #define DEG_TO_RAD 0.01745329251
+#define PI 3.14159265359
 
 template <typename Scalar, int RowsAtCompileTime, int ColsAtCompileTime>
 	UartPort & operator <<(UartPort & port, Eigen::Matrix< Scalar, RowsAtCompileTime, ColsAtCompileTime> &m)

@@ -2,7 +2,7 @@
 
 #include "EigenAddons.h"
 #include "Lista.h"
-
+#include "Robot.h"
 
 typedef enum 
 {
@@ -37,7 +37,7 @@ public:
 		type = t;
 	}
 	
-	virtual void calculate()
+	virtual void calculate(Robot & robot)
 	{
 	}
 	virtual void execute()
@@ -50,13 +50,16 @@ class StraightLineMovAction : public Action
 	Eigen::Vector3d starting,
 					destination;
 	
+	Lista<Lista<int>> pathInServoDegs;
+	
+	
 public:
 	StraightLineMovAction(Eigen::Vector3d start, Eigen::Vector3d dest);
 	~StraightLineMovAction()
 	{
 	}
 	
-	virtual void calculate();
+	virtual void calculate(Robot & robot);
 	virtual void execute();
 	
 	void lerp(Lista<Eigen::Vector3d> & path);
@@ -70,7 +73,7 @@ public:
 	FreeMovAction(Eigen::Vector3d dest);
 	~FreeMovAction();
 	
-	virtual void calculate()
+	virtual void calculate(Robot & robot)
 	{
 	}
 	virtual void execute()
@@ -90,7 +93,7 @@ public:
 	
 	~ArchMovAction();
 	
-	virtual void calculate()
+	virtual void calculate(Robot & robot)
 	{
 	}
 	virtual void execute()
@@ -107,7 +110,7 @@ public:
 	DelayAction(double mill);
 	~DelayAction();
 	
-	virtual void calculate()
+	virtual void calculate(Robot & robot)
 	{
 	}
 	virtual void execute()
@@ -115,3 +118,4 @@ public:
 	}
 };
 
+double map(double x, double in_min, double in_max, double out_min, double out_max);

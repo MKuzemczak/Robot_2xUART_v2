@@ -47,6 +47,7 @@
 #include "EigenAddons.h"
 
 #include "Robot.h"
+#include "Action.h"
 
 using namespace Eigen;
 
@@ -118,7 +119,7 @@ int main(void)
 	{
 		if (flags.isSet(PC_SAVE_RCV_VAL))
 		{
-			MatrixXd m0(2,2), m1(2,2);
+			/*MatrixXd m0(2,2), m1(2,2);
 			MatrixXd m2(3,4), m3;
 			m0 << 1, 2,
 				-3, 11;
@@ -142,8 +143,8 @@ int main(void)
 			
 			//pcPort << m0(0, 0) << "  " << m0(0, 1) << "\n" << m0(1, 0) << "  " << m0(1, 1) << "\n";
 			//pcPort << m1(0, 0) << "  " << m1(0, 1) << "\n" << m1(1, 0) << "  " << m1(1, 1) << "\n";
+			*/
 			
-			/*
 			Robot r;
 			
 			r.addRegJoint(-90,  0, 0);
@@ -158,8 +159,24 @@ int main(void)
 			//for (int i = 0; i < 6; i++)
 				//pcPort << r.getJointZinGlobal(i) << '\n';
 			
-			pcPort << "Polozenie TCP:\n" << r.getTCPlocation();
-			**/
+			pcPort << "Polozenie TCP na poczatku:\n" << r.getTCPlocation();
+			
+			Eigen::Vector3d v;
+			
+			v << 120, 50, 50;
+			
+			StraightLineMovAction a(r.getTCPlocation(), v);
+			
+			a.calculate(r);
+			a.execute();
+			
+			pcPort << "Polozenie TCP na koncu:\n" << r.getTCPlocation();
+			
+			pcPort << "Katy:\n";
+			
+			for (int i = 0; i < r.getDOF(); i++)
+				pcPort << r.getJointThetaRad(i)/DEG_TO_RAD << '\n';
+			
 			pcPort << "Odebrane: " << pcPort.getBuffer()->toInt() << '\n';
 			flags.reset(PC_SAVE_RCV_VAL);
 			pcPort.getBuffer()->clear();
