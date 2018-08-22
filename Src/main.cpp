@@ -117,6 +117,48 @@ int main(void)
 	int i = 0;
 	while (1)
 	{
+		if (flags.isSet(ARDUINO_CONNECTED))
+		{
+			arduinoPort << 'A';
+			
+			
+			///////////////////////////////////// temporal for testing
+			//flags.set(ARDUINO_MOV_FIN);
+			
+			while(!flags.isSet(ARDUINO_MOV_FIN));
+				
+			
+			arduinoPort << "B350\n382\n347\n355\n364\n362\nC";
+			
+			flags.reset(ARDUINO_MOV_FIN);
+			
+			pcPort << "Poczatek\n";
+			
+			Robot r;
+			
+			r.addRegJoint(-90, 0, 0);
+			r.addRegJoint(90, 0, 0);
+			r.addRegJoint(0, 100, 0);
+			r.addLocJoint(90, 0, 0);
+			r.addLocJoint(-90, 0, 50);
+			r.setTCPaLength(20);
+			
+			r.setThetaDeg(1, 90); 
+			r.setThetaDeg(4, -90);
+			
+			Eigen::Vector3d v;
+			
+			v << 120, 50, 50;
+			
+			StraightLineMovAction a(r.getTCPlocation(), v);
+			pcPort << "Stworzono a\n";
+			a.calculate(r);
+			pcPort << "Wykonano obliczenia\n";
+			a.execute();
+			pcPort << "Wykonano execute()\n";
+			///////////////////////////////////// !temporal for stesting
+			
+		}
 		if (flags.isSet(PC_SAVE_RCV_VAL))
 		{
 			/*MatrixXd m0(2,2), m1(2,2);
@@ -144,7 +186,7 @@ int main(void)
 			//pcPort << m0(0, 0) << "  " << m0(0, 1) << "\n" << m0(1, 0) << "  " << m0(1, 1) << "\n";
 			//pcPort << m1(0, 0) << "  " << m1(0, 1) << "\n" << m1(1, 0) << "  " << m1(1, 1) << "\n";
 			*/
-			
+			pcPort << "Poczatek\n";
 			Robot r;
 			
 			r.addRegJoint(-90,  0, 0);
@@ -154,7 +196,8 @@ int main(void)
 			r.addLocJoint(-90, 0, 50);
 			r.setTCPaLength(20);
 			
-			//r.setThetaDeg(3, 30); // test reakcji na ustawienie k¹ta theta - dzia³a
+			r.setThetaDeg(1, 90); 
+			r.setThetaDeg(4, -90);
 			
 			//for (int i = 0; i < 6; i++)
 				//pcPort << r.getJointZinGlobal(i) << '\n';

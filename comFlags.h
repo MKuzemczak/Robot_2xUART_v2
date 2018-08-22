@@ -20,6 +20,7 @@
 #define ARDUINO_MOV_FIN FLAG_OFFSET+0x0D
 
 
+
 class Flags
 {
 	char tab[NUM_OF_FLAGS];

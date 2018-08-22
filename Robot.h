@@ -6,6 +6,8 @@
 
 #include "Joint.h"
 
+//#define DEBUG_ROBOT
+
 class Robot
 {
 	Lista<Joint> regJoints,
@@ -20,6 +22,8 @@ class Robot
 	Lista<Eigen::Vector2i> servoDegLimits; // each element of the list is a vector containing min & max values of a servo, measured in units accepted by servo controller
 	
 	Lista<Eigen::Vector2i> jointDegConstraints;	// each element of the list is a vector of min & max degrees of a joint (constructional restrictions)
+	
+	Lista<Eigen::Vector2i> jointDegLimitsForConversion; // needed to convert from radians to servo degs
 	
 	// aktualne rozwarcie chwytaka
 	// lista punktow	
@@ -71,6 +75,16 @@ public:
 	int getServoMax(int index)
 	{
 		return servoDegLimits[index][1];
+	}
+	
+	int getConversionMin(int index)
+	{
+		return jointDegLimitsForConversion[index][0];
+	}
+	
+	int getConversionMax(int index)
+	{
+		return jointDegLimitsForConversion[index][1];
 	}
 	
 	void updateDHmatrices();

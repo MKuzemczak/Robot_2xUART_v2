@@ -29,8 +29,12 @@ class Action
 	ActionType type;
 	
 public:
-	Action();
-	~Action();
+	Action()
+	{
+	}
+	~Action()
+	{
+	}
 	
 	void setType(ActionType t)
 	{
@@ -69,16 +73,14 @@ class FreeMovAction : public Action
 {
 	Eigen::Vector3d destination;
 	
+	Lista<int> destInServoDegs;
+	
 public:
 	FreeMovAction(Eigen::Vector3d dest);
 	~FreeMovAction();
 	
-	virtual void calculate(Robot & robot)
-	{
-	}
-	virtual void execute()
-	{
-	}
+	virtual void calculate(Robot & robot);
+	virtual void execute();
 };
 
 class ArchMovAction : public Action
@@ -93,12 +95,9 @@ public:
 	
 	~ArchMovAction();
 	
-	virtual void calculate(Robot & robot)
-	{
-	}
-	virtual void execute()
-	{
-	}
+	virtual void calculate(Robot & robot);
+	
+	virtual void execute();
 	
 };
 

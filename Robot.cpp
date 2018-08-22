@@ -13,8 +13,8 @@ Robot::Robot()
 	s[0] = 150;
 	s[1] = 555;
 	servoDegLimits.push_back(s);
-	s[0] = 178;	
-	s[1] = 593;
+	s[0] = 593;	
+	s[1] = 178;
 	servoDegLimits.push_back(s);
 	s[0] = 154;
 	s[1] = 545;
@@ -32,18 +32,34 @@ Robot::Robot()
 	s[0] = -90;
 	s[1] = 90;
 	jointDegConstraints.push_back(s);
+	s[0] = 20;	
+	s[1] = 150;
+	jointDegConstraints.push_back(s);
+	s[0] = -45;
+	s[1] = 45;
+	jointDegConstraints.push_back(s);
+	s[0] = -90;
+	s[1] = 90;
+	jointDegConstraints.push_back(s);
+	s[0] = -160;
+	s[1] = -20;
+	jointDegConstraints.push_back(s);
+	
+	s[0] = -90;
+	s[1] = 90;
+	jointDegLimitsForConversion.push_back(s);
 	s[0] = 0;	
-	s[1] = 180;
-	jointDegConstraints.push_back(s);
+	s[1] = 190;
+	jointDegLimitsForConversion.push_back(s);
 	s[0] = -90;
 	s[1] = 90;
-	jointDegConstraints.push_back(s);
+	jointDegLimitsForConversion.push_back(s);
 	s[0] = -90;
 	s[1] = 90;
-	jointDegConstraints.push_back(s);
+	jointDegLimitsForConversion.push_back(s);
 	s[0] = -180;
-	s[1] = 0;
-	jointDegConstraints.push_back(s);
+	s[1] = -0;
+	jointDegLimitsForConversion.push_back(s);
 	
 }
 
@@ -244,9 +260,18 @@ bool Robot::setRegional(Eigen::Vector3d & point)
 	updateDHmatrices();
 	updateDHvectors();
 	
+#ifdef DEBUG_ROBOT
+	pcPort << "Robot::setRegional(), zaktualizowane DH\n";
+#endif // DEBUG_ROBOT
+
+	
 	while ((double)(point - TCP.getLocation()).norm() > 1)
 	{
 		jacobAlgStep(0.5, regJoints.size(), point);
+		
+#ifdef DEBUG_ROBOT
+		pcPort << "Robot::setRegional(), koniec petli\n";
+#endif // DEBUG_ROBOT
 	}
 }
 
