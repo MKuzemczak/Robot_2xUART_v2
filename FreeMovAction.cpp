@@ -15,10 +15,7 @@ void FreeMovAction::calculate(Robot & robot)
 {
 	robot.setRegional(destination);
 	
-	for (int j = 0; j < robot.getDOF(); j++)
-	{
-		destInServoDegs.push_back(map(robot.getJointThetaRad(j), 0, PI, (double)robot.getServoMin(j), (double)robot.getServoMax(j)));
-	}
+	robot.mapThetasToServos(destInServoDegs);
 }
 
 void FreeMovAction::execute()

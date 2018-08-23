@@ -7,60 +7,6 @@ Robot::Robot()
 	DOF = 0;
 	
 	joints.push_back(&TCP);
-	
-	Eigen::Vector2i s;
-	
-	s[0] = 150;
-	s[1] = 555;
-	servoDegLimits.push_back(s);
-	s[0] = 593;	
-	s[1] = 178;
-	servoDegLimits.push_back(s);
-	s[0] = 154;
-	s[1] = 545;
-	servoDegLimits.push_back(s);
-	s[0] = 160;
-	s[1] = 560;
-	servoDegLimits.push_back(s);
-	s[0] = 165;
-	s[1] = 570;
-	servoDegLimits.push_back(s);
-	s[0] = 160;
-	s[1] = 570;
-	servoDegLimits.push_back(s);
-
-	s[0] = -90;
-	s[1] = 90;
-	jointDegConstraints.push_back(s);
-	s[0] = 20;	
-	s[1] = 150;
-	jointDegConstraints.push_back(s);
-	s[0] = -45;
-	s[1] = 45;
-	jointDegConstraints.push_back(s);
-	s[0] = -90;
-	s[1] = 90;
-	jointDegConstraints.push_back(s);
-	s[0] = -160;
-	s[1] = -20;
-	jointDegConstraints.push_back(s);
-	
-	s[0] = -90;
-	s[1] = 90;
-	jointDegLimitsForConversion.push_back(s);
-	s[0] = 0;	
-	s[1] = 190;
-	jointDegLimitsForConversion.push_back(s);
-	s[0] = -90;
-	s[1] = 90;
-	jointDegLimitsForConversion.push_back(s);
-	s[0] = -90;
-	s[1] = 90;
-	jointDegLimitsForConversion.push_back(s);
-	s[0] = -180;
-	s[1] = -0;
-	jointDegLimitsForConversion.push_back(s);
-	
 }
 
 
@@ -233,7 +179,7 @@ bool Robot::jacobAlgStep(double param, int indexOfSetJoint, Eigen::Vector3d & ta
 	
 	for (int i = 0; i < indexOfSetJoint; i++)
 	{
-		constrain(thetas(i), jointDegConstraints[i][0] * DEG_TO_RAD, jointDegConstraints[i][1] * DEG_TO_RAD);
+		constrain(thetas(i), joints[i]->getConstructionMinMaxDeg()[0] * DEG_TO_RAD, joints[i]->getConstructionMinMaxDeg()[1] * DEG_TO_RAD);
 		joints[i]->setTheta(thetas(i));
 	}
 		
@@ -303,6 +249,14 @@ Eigen::Matrix4d & Robot::getJointDHmatrix(int joint)
 Eigen::Vector3d & Robot::getJointZinGlobal(int joint)
 {
 	return joints[joint]->getZinGlobal();
+}
+
+void Robot::mapThetasToServos(Lista<int> & lista)
+{
+	for (int i = 0; i < joints.size() - 1; i++)
+	{
+		joints[i]->mapThetaToServo(lista);
+	}
 }
 
 void constrain(double & x, double min, double max)

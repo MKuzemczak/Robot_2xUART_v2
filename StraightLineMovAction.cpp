@@ -34,22 +34,19 @@ void StraightLineMovAction::calculate(Robot & robot)
 #endif // DEBUG
 
 		Lista<int> s;
-			
-		for (int j = 0; j < robot.getDOF(); j++)
-		{
-			pcPort << "void StraightLineMovAction::calculate(Robot & robot): reprezentacja serw w Joint do zrobienia, ten kod nie dzia³a poprawnie!\n";
-			s.push_back(map(robot.getJointThetaRad(j),
-				(double)robot.getConversionMin(j)*DEG_TO_RAD,
-				(double)robot.getConversionMax(j)*DEG_TO_RAD,
-				(double)robot.getServoMin(j),
-				(double)robot.getServoMax(j)));
-			
-			
+		
+		robot.mapThetasToServos(s);
+		
 #ifdef DEBUG_STRAIGHT_LINE_ACTION
-			pcPort << "Straight Line Action, calculate(), koniec petli wewnetrznej\n";	  
-#endif // DEBUG
-
+		pcPort << "straightLineMovAction::calculate() : zmapowano katy na serwa:\n";
+		
+		for (int i = 0; i < s.size(); i++)
+		{
+			pcPort << s[i] << ' ';
 		}
+		
+		pcPort << "\n\n";
+#endif // DEBUG
 		
 		pathInServoDegs.push_back(s);
 		
@@ -111,6 +108,3 @@ void StraightLineMovAction::lerp(Lista<Eigen::Vector3d> & path)
 	path.push_back(destination);
 }
 
-double map(double x, double in_min, double in_max, double out_min, double out_max) {
-	return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-}

@@ -198,6 +198,25 @@ int main(void)
 			
 			r.setThetaDeg(1, 90); 
 			r.setThetaDeg(4, -90);
+
+			r.addJointServoMinMax(0, 150, 555);
+			r.addJointServoMinMax(1, 593, 178);
+			r.addJointServoMinMax(1, 154, 545);
+			r.addJointServoMinMax(2, 160, 560);
+			r.addJointServoMinMax(3, 165, 570);
+			r.addJointServoMinMax(4, 160, 570);
+	
+			r.setJointConstructionMinMax(0, -90, 90);
+			r.setJointConstructionMinMax(1, 20, 150);
+			r.setJointConstructionMinMax(2, -45, 45);
+			r.setJointConstructionMinMax(3, -90, 90);
+			r.setJointConstructionMinMax(4, -160, -20);
+			
+			r.setJointConversionMinMax(0, -90, 90);
+			r.setJointConversionMinMax(1, 0, 180);
+			r.setJointConversionMinMax(2, -90, 90);
+			r.setJointConversionMinMax(3, -90, 90);
+			r.setJointConversionMinMax(4, -180, 0);
 			
 			//for (int i = 0; i < 6; i++)
 				//pcPort << r.getJointZinGlobal(i) << '\n';
