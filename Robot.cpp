@@ -197,7 +197,7 @@ bool Robot::set(Eigen::Vector3d & point)
 	
 	while ((double)(point - TCP.getLocation()).norm() > 1)
 	{
-		jacobAlgStep(0.5, joints.size() - 1, point);
+		jacobAlgStep(1, joints.size() - 1, point);
 	}
 }
 
@@ -213,7 +213,7 @@ bool Robot::setRegional(Eigen::Vector3d & point)
 	
 	while ((double)(point - TCP.getLocation()).norm() > 1)
 	{
-		jacobAlgStep(0.5, regJoints.size(), point);
+		jacobAlgStep(1, regJoints.size(), point);
 		
 #ifdef DEBUG_ROBOT
 		pcPort << "Robot::setRegional(), koniec petli\n";
@@ -265,4 +265,25 @@ void constrain(double & x, double min, double max)
 		x = min;
 	if (x > max)
 		x = max;
+}
+
+////////////////////////////////////////////////////////////////////// setters & getters
+
+int Robot::getJointConversionMin(int joint)
+{
+	return joints[joint]->getConversionMinDeg();
+}
+int Robot::getJointConversionMax(int joint)
+{
+	return joints[joint]->getConversionMaxDeg();
+}
+
+int Robot::getJointConstructionMin(int joint)
+{
+	return joints[joint]->getConstructionMinDeg();
+}
+
+int Robot::getJointConstructionMax(int joint)
+{
+	return joints[joint]->getConstructionMaxDeg();
 }

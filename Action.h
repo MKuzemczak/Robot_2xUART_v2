@@ -10,7 +10,8 @@ typedef enum
 	FREE,
 	ARCH,
 	LOCAL_CHANGE,
-	DELAY
+	DELAY,
+	SINGLE
 } ActionType;
 
 
@@ -22,34 +23,40 @@ typedef enum
  *  oraz metodê, która wykorzystuje te dane (np. interpoluje tor lub obs³uguje czasomierz). 
  *
  **/
-class Action
+class BaseAction
 {
 	// klasa bazowa, niewiele tu jest, wszystko w klasach pochodnych
 	
 	ActionType type;
+	bool calculated,
+		done;
 	
 public:
-	Action()
-	{
-	}
-	~Action()
+	BaseAction();
+	~BaseAction()
 	{
 	}
 	
-	void setType(ActionType t)
-	{
-		type = t;
-	}
+	void setType(ActionType t);
+	void setCalculated();
+	bool isCalculated();
+	void resetCalculated();
+	void setDone();
+	void resetDone();
+	bool isDone();
 	
 	virtual void calculate(Robot & robot)
 	{
 	}
 	virtual void execute()
+	{		  
+	}
+	virtual int size()
 	{
 	}
 };
 
-class StraightLineMovAction : public Action
+class StraightLineMovAction : public BaseAction
 {
 	Eigen::Vector3d starting,
 					destination;
@@ -67,9 +74,10 @@ public:
 	virtual void execute();
 	
 	void lerp(Lista<Eigen::Vector3d> & path);
+	virtual int size();
 };
 
-class FreeMovAction : public Action
+class FreeMovAction : public BaseAction
 {
 	Eigen::Vector3d destination;
 	
@@ -83,7 +91,7 @@ public:
 	virtual void execute();
 };
 
-class ArchMovAction : public Action
+class ArchMovAction : public BaseAction
 {
 	Eigen::Vector3d starting, 
 					intermediate,
@@ -101,7 +109,7 @@ public:
 	
 };
 
-class DelayAction : public Action
+class DelayAction : public BaseAction
 {
 	double millis;
 	
@@ -115,4 +123,18 @@ public:
 	virtual void execute()
 	{
 	}
+};
+
+class SetSingleJointAction : public BaseAction
+{
+	int joint,
+		angleDeg,
+		servoSignal;
+	
+public:
+	SetSingleJointAction();
+	~SetSingleJointAction();
+	
+	virtual void calculate(Robot & robot);
+	virtual void execute();
 };

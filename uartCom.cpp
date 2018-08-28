@@ -72,7 +72,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 		HAL_UART_Receive_IT(pcPort.getHandlePtr(), pcPort.getRcvByte(), 1);	// nasluchuj dalej
 	} else if(huart->Instance == ARDUINO_PORT) {
 		
-		HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+		//HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
 		char rcvByte = *(arduinoPort.getRcvByte());
 		if (rcvByte >= FLAG_OFFSET && rcvByte < NUM_OF_FLAGS + FLAG_OFFSET)
 		{
@@ -86,6 +86,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 		{
 			arduinoPort.rcvCharToBuffer();
 		}
+		
 		
 		HAL_UART_Receive_IT(arduinoPort.getHandlePtr(), arduinoPort.getRcvByte(), 1);
 	}

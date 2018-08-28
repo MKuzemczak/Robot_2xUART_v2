@@ -67,15 +67,22 @@ public:
 		joints[joint]->addServoMinMax(min, max);
 	}
 	
+	
 	void setJointConversionMinMax(int joint, int min, int max)
 	{
 		joints[joint]->setConversionMinMaxDeg(min, max);
 	}
 	
+	int getJointConversionMin(int joint);
+	int getJointConversionMax(int joint);
+	
 	void setJointConstructionMinMax(int joint, int min, int max)
 	{
 		joints[joint]->setConstructionMinMaxDeg(min, max);
 	}
+	
+	int getJointConstructionMin(int joint);
+	int getJointConstructionMax(int joint);
 	
 	void mapThetasToServos(Lista<int> & lista);
 	

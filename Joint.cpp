@@ -62,3 +62,25 @@ double map(double x, double in_min, double in_max, double out_min, double out_ma
 	
 	return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
+
+///////////////////////////////////////////////////////////////////////////////////// setters & getters
+
+int Joint::getConstructionMinDeg()
+{
+	return angleConstructionMinMaxDeg[0];
+}
+
+int Joint::getConstructionMaxDeg()
+{
+	return angleConstructionMinMaxDeg[1];
+}
+
+int Joint::getConversionMinDeg()
+{
+	return angleConversionMinMaxDeg[0];
+}
+
+int Joint::getConversionMaxDeg()
+{
+	return angleConversionMinMaxDeg[1];
+}

@@ -145,6 +145,16 @@ public:
 		return angleConstructionMinMaxDeg;
 	}
 	
+	int getServoAmount()
+	{
+		return servosMinMax.size();
+	}
+	
+	int getConstructionMinDeg();
+	int getConstructionMaxDeg();
+	int getConversionMinDeg();
+	int getConversionMaxDeg();
+	
 	~Joint();
 };
 

@@ -49,6 +49,10 @@
 #include "Robot.h"
 #include "Action.h"
 
+#include "ActionManager.h"
+
+//#define DEBUG_MAIN
+
 using namespace Eigen;
 
 /* USER CODE BEGIN Includes */
@@ -60,7 +64,11 @@ TIM_HandleTypeDef htim10;
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
+Robot r;
+ActionManager manager;
+bool startInterrupt = false;
 
+int timerCntr = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -74,6 +82,102 @@ static void MX_TIM10_Init(void);
 /* USER CODE END PFP */
 
 /* USER CODE BEGIN 0 */
+
+/////////////////temporal for testing
+void robotInit()
+{
+	r.addRegJoint(-90, 0, 0);
+	r.addRegJoint(90, 0, 0);
+	r.addRegJoint(0, 150, 0);
+	r.addLocJoint(90, 93, 0);
+	r.addLocJoint(-90, 0, 0);
+	r.setTCPaLength(90);
+			
+	r.setThetaDeg(1, 90); 
+	r.setThetaDeg(2, -90);
+			
+	r.addJointServoMinMax(0, 555, 150);
+	r.addJointServoMinMax(1, 178, 593);
+	r.addJointServoMinMax(1, 545, 154);
+	r.addJointServoMinMax(2, 560, 160);
+	r.addJointServoMinMax(3, 570, 165);
+	r.addJointServoMinMax(4, 160, 570);
+	
+	r.setJointConstructionMinMax(0, -90, 90);
+	r.setJointConstructionMinMax(1, 20, 150);
+	r.setJointConstructionMinMax(2, -135, -45);
+	r.setJointConstructionMinMax(3, -90, 90);
+	r.setJointConstructionMinMax(4, -70, 70);
+			
+	r.setJointConversionMinMax(0, -90, 90);
+	r.setJointConversionMinMax(1, 0, 180);
+	r.setJointConversionMinMax(2, -180, 0);
+	r.setJointConversionMinMax(3, -90, 90);
+	r.setJointConversionMinMax(4, -90, 90);
+	
+#ifdef DEBUG_MAIN
+	pcPort << "Koniec robotInit()\n";
+#endif // DEBUG_MAIN
+
+	
+}
+
+void managerInit()
+{
+	manager.setRobotPtr(&r);
+	
+	manager.start();
+}
+
+void setActions()
+{
+	Eigen::Vector3d v0, v1;
+			
+	v0 << 50, 150, 100;
+	v1 << 50, 150, -100;
+	
+	manager.addStraightLineMovAction(r.getTCPlocation(), v0);
+	manager.addStraightLineMovAction(v0, v1);
+	
+	v0 << 100, 200, 100;
+	
+	manager.addStraightLineMovAction(v1, v0);
+		
+	v1 << 200, 100, 0;
+	
+	manager.addStraightLineMovAction(v0, v1);
+	
+	v0 << 1, 300, 0;
+	
+	manager.addStraightLineMovAction(v1, v0);
+	
+	v1 << 200, 100, 200;
+	
+	manager.addStraightLineMovAction(v0, v1);
+	
+#ifdef DEBUG_MAIN
+	pcPort << "koniec setActions()\n";
+#endif // DEBUG_MAIN
+
+}
+
+/////////////////!temporal for testing
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
+	if (htim->Instance == TIM10) {
+		timerCntr++;
+		if (timerCntr == 1000)
+			timerCntr = 0;
+		
+		if (flags.isSet(ARDUINO_MOV_FIN) && startInterrupt && (timerCntr % 20) == 0)
+		{
+			//HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+			manager.nextStep();
+		}
+		//pcPort << "Koniec przerwania timera\n";
+	}
+	
+}
 
 /* USER CODE END 0 */
 
@@ -109,7 +213,7 @@ int main(void)
 	portInit();	
 	MX_TIM10_Init();
 	/* USER CODE BEGIN 2 */
-
+	HAL_TIM_Base_Start_IT(&htim10);
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
@@ -117,14 +221,15 @@ int main(void)
 	int i = 0;
 	while (1)
 	{
-		if (flags.isSet(ARDUINO_CONNECTED))
+		//if(timerCntr == 999)
+			//HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);			  
+		
+		if (flags.isSet(ARDUINO_CONNECTED) && !HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin))
 		{
 			arduinoPort << 'A';
 			
 			
 			///////////////////////////////////// temporal for testing
-			//flags.set(ARDUINO_MOV_FIN);
-			
 			while(!flags.isSet(ARDUINO_MOV_FIN));
 				
 			
@@ -132,33 +237,25 @@ int main(void)
 			
 			flags.reset(ARDUINO_MOV_FIN);
 			
+			flags.set(PC_LOOP);
+			
 			pcPort << "Poczatek\n";
 			
-			Robot r;
+			robotInit();
+			setActions();
+			managerInit();
 			
-			r.addRegJoint(-90, 0, 0);
-			r.addRegJoint(90, 0, 0);
-			r.addRegJoint(0, 100, 0);
-			r.addLocJoint(90, 0, 0);
-			r.addLocJoint(-90, 0, 50);
-			r.setTCPaLength(20);
+			startInterrupt = true;
 			
-			r.setThetaDeg(1, 90); 
-			r.setThetaDeg(4, -90);
-			
-			Eigen::Vector3d v;
-			
-			v << 120, 50, 50;
-			
-			StraightLineMovAction a(r.getTCPlocation(), v);
-			pcPort << "Stworzono a\n";
-			a.calculate(r);
-			pcPort << "Wykonano obliczenia\n";
-			a.execute();
-			pcPort << "Wykonano execute()\n";
 			///////////////////////////////////// !temporal for stesting
 			
 		}
+		
+		if (manager.isCheckCalculations())
+		{
+			manager.calculations();
+		}
+		
 		if (flags.isSet(PC_SAVE_RCV_VAL))
 		{
 			/*MatrixXd m0(2,2), m1(2,2);
@@ -315,7 +412,7 @@ static void MX_TIM10_Init(void)
 {
 
 	htim10.Instance = TIM10;
-	htim10.Init.Prescaler = 9999;
+	htim10.Init.Prescaler = 19;
 	htim10.Init.CounterMode = TIM_COUNTERMODE_UP;
 	htim10.Init.Period = 3599;
 	htim10.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
