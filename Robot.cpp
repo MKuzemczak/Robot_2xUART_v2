@@ -14,29 +14,6 @@ Robot::~Robot()
 {
 }
 
-void Robot::addRegJoint(double a, double al, double dl)
-{
-	regJoints.push_back(Joint(a * DEG_TO_RAD, al, dl));
-	
-	// dodanie do listy wszystkich przegubow wskaznik na teraz dodawany
-	joints.insert(joints.iteratorAt(regJoints.size() - 1), &(regJoints[regJoints.size() - 1]));
-	
-	DOF++;
-	
-	updateDHmatrices();	
-	updateDHvectors();
-}
-void Robot::addLocJoint(double a, double al, double dl)
-{
-	locJoints.push_back(Joint(a * DEG_TO_RAD, al, dl));
-	
-	joints.insert(joints.iteratorAt(joints.size() - 1), &(locJoints[locJoints.size() - 1]));
-	
-	DOF++;
-	
-	updateDHmatrices();
-	updateDHvectors();
-}
 	
 void Robot::updateDHmatrices()
 {	
@@ -221,6 +198,100 @@ bool Robot::setRegional(Eigen::Vector3d & point)
 	}
 }
 
+void Robot::mapThetasToServos(Lista<int> & lista)
+{
+	for (int i = 0; i < joints.size() - 1; i++)
+	{
+		joints[i]->mapThetaToServo(lista);
+	}
+}
+
+
+////////////////////////////////////////////////////////////////////// setters & getters & adders
+
+void Robot::setJointConversionMinMax(int joint, int min, int max)
+{
+	joints[joint]->setConversionMinMaxDeg(min, max);
+}
+
+int Robot::getJointConversionMin(int joint)
+{
+	return joints[joint]->getConversionMinDeg();
+}
+int Robot::getJointConversionMax(int joint)
+{
+	return joints[joint]->getConversionMaxDeg();
+}
+
+void Robot::setJointConstructionMinMax(int joint, int min, int max)
+{
+	joints[joint]->setConstructionMinMaxDeg(min, max);
+}
+
+int Robot::getJointConstructionMin(int joint)
+{
+	return joints[joint]->getConstructionMinDeg();
+}
+
+int Robot::getJointConstructionMax(int joint)
+{
+	return joints[joint]->getConstructionMaxDeg();
+}
+
+void Robot::addJointServoMinMax(int joint, int min, int max)
+{
+	joints[joint]->addServoMinMax(min, max);
+}
+
+int Robot::getDOF()
+{
+	return DOF;
+}
+	
+double Robot::getJointThetaRad(int joint)
+{
+	return joints[joint]->getTheta();
+}
+
+Eigen::Vector3d & Robot::getTCPlocation()
+{
+	return TCP.getLocation();
+}
+
+void Robot::setTCPaLength(double l)
+{
+	TCP.setaLength(l); 
+		
+	updateDHmatrices();
+	updateDHvectors();
+}
+
+void Robot::addRegJoint(double a, double al, double dl)
+{
+	regJoints.push_back(Joint(a * DEG_TO_RAD, al, dl));
+	
+	// dodanie do listy wszystkich przegubow wskaznik na teraz dodawany
+	joints.insert(joints.iteratorAt(regJoints.size() - 1), &(regJoints[regJoints.size() - 1]));
+	
+	DOF++;
+	
+	updateDHmatrices();	
+	updateDHvectors();
+}
+
+void Robot::addLocJoint(double a, double al, double dl)
+{
+	locJoints.push_back(Joint(a * DEG_TO_RAD, al, dl));
+	
+	joints.insert(joints.iteratorAt(joints.size() - 1), &(locJoints[locJoints.size() - 1]));
+	
+	DOF++;
+	
+	updateDHmatrices();
+	updateDHvectors();
+}
+
+
 void Robot::setThetaDeg(int joint, double theta)
 {
 	joints[joint]->setTheta(theta*DEG_TO_RAD);
@@ -251,39 +322,15 @@ Eigen::Vector3d & Robot::getJointZinGlobal(int joint)
 	return joints[joint]->getZinGlobal();
 }
 
-void Robot::mapThetasToServos(Lista<int> & lista)
-{
-	for (int i = 0; i < joints.size() - 1; i++)
-	{
-		joints[i]->mapThetaToServo(lista);
-	}
-}
+//////////////////////////////////////////////////////////////////// !setters & getters & adders
 
+
+
+////////////////////////////////////////////////////////////// other
 void constrain(double & x, double min, double max)
 {
 	if (x < min)
 		x = min;
 	if (x > max)
 		x = max;
-}
-
-////////////////////////////////////////////////////////////////////// setters & getters
-
-int Robot::getJointConversionMin(int joint)
-{
-	return joints[joint]->getConversionMinDeg();
-}
-int Robot::getJointConversionMax(int joint)
-{
-	return joints[joint]->getConversionMaxDeg();
-}
-
-int Robot::getJointConstructionMin(int joint)
-{
-	return joints[joint]->getConstructionMinDeg();
-}
-
-int Robot::getJointConstructionMax(int joint)
-{
-	return joints[joint]->getConstructionMaxDeg();
 }

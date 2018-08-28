@@ -26,136 +26,58 @@ public:
 	Joint();
 	Joint(double a, double al, double dl);
 	
+	~Joint();
+	
+	
 	void mapThetaToServo(Lista<int> & lista);
 	
-	void setAlpha(double a)
-	{
-		alpha = a;
-			
-	}
 	
-	double getAlpha()
-	{
-		return alpha;
-	}
+	/////////////////////////////////////// setters & getters & adders
+	void setAlpha(double a);
+	
+	double getAlpha();
 	
 	// aktualizuj kat Theta
-	void setTheta(double T)
-	{
-		Theta = T;
-	}
+	void setTheta(double T);
 	
-	double getTheta()
-	{
-		return Theta;
-	}
+	double getTheta();
 	
-	void setaLength(double l)
-	{
-		aLength = l;
-	}
+	void setaLength(double l);
 	
-	double getaLength()
-	{
-		return aLength;
-	}
+	double getaLength();
 	
-	void setdLength(double l)
-	{
-		dLength = l;
-	}
+	void setdLength(double l);
 	
-	double getdLength()
-	{
-		return dLength;
-	}
+	double getdLength();
 	
-	void setLocation(Eigen::Vector3d & v)
-	{
-		locationInGlobal = v;
-	}
+	void setLocation(Eigen::Vector3d & v);
 	
-	Eigen::Vector3d & getLocation()
-	{
-		return locationInGlobal;
-	}
+	Eigen::Vector3d & getLocation();
 	
-	void setZinGlobal(Eigen::Vector3d & v)
-	{
-		ZaxisInGlobal = v;
-	}
+	void setZinGlobal(Eigen::Vector3d & v);
 	
-	Eigen::Vector3d & getZinGlobal()
-	{
-		return ZaxisInGlobal;
-	}
+	Eigen::Vector3d & getZinGlobal();
 	
-	Eigen::Matrix4d & getDHmatrix()
-	{
-		return DHmatrix;
-	}
+	Eigen::Matrix4d & getDHmatrix();
 	
-	void addServoMinMax(int min, int max)
-	{
-		Eigen::Vector2i v;
-		
-		v << min, max;
-		
-		
-#ifdef DEBUG_JOINT
-		pcPort << "Joint::addServoMinMax(" << min << ", " << max << ");\n\n";				  
-#endif // DEBUG_JOINT
-		
-		servosMinMax.push_back(v);
-	}
+	void addServoMinMax(int min, int max);
 	
-	void setServoMinMax(int servo, int min, int max)
-	{
-		if (servo < 0 || servo >= servosMinMax.size())
-			pcPort << "Joint::setServoMinMax(...): Error: Servo index out of bounds\n";
-		else
-		{
-			servosMinMax[servo][0] = min;
-			servosMinMax[servo][1] = max;
-		}
-		
-
-	}
+	void setServoMinMax(int servo, int min, int max);
 	
-	void setConversionMinMaxDeg(int min, int max)
-	{
-		angleConversionMinMaxDeg << min, max;
-		
-#ifdef DEBUG_JOINT
-		pcPort << "Joint::setConversionMinMaxDeg(" << min << ", " << max << ");\n\n";				  
-#endif // DEBUG_JOINT
-	}
+	void setConversionMinMaxDeg(int min, int max);
 	
-	void setConstructionMinMaxDeg(int min, int max)
-	{
-		angleConstructionMinMaxDeg << min, max;
-		
-#ifdef DEBUG_JOINT
-		pcPort << "Joint::setConstructionMinMaxDeg(" << min << ", " << max << ");\n\n";				  
-#endif // DEBUG_JOINT
-	}
+	void setConstructionMinMaxDeg(int min, int max);
 	
-	Eigen::Vector2i & getConstructionMinMaxDeg()
-	{
-		return angleConstructionMinMaxDeg;
-	}
+	Eigen::Vector2i & getConstructionMinMaxDeg();
 	
-	int getServoAmount()
-	{
-		return servosMinMax.size();
-	}
+	int getServoAmount();
 	
 	int getConstructionMinDeg();
 	int getConstructionMaxDeg();
 	int getConversionMinDeg();
 	int getConversionMaxDeg();
+	///////////////////////////////////////////////////////// !setters & getters & adders
 	
-	~Joint();
 };
 
 double map(double x, double in_min, double in_max, double out_min, double out_max);

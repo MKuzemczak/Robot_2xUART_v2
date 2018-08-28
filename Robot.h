@@ -26,64 +26,6 @@ public:
 	Robot();
 	~Robot();
 
-	
-	void addRegJoint(double a, double al, double dl);
-	void addLocJoint(double a, double l, double dl);
-	
-	
-	
-	
-	void setThetaDeg(int joint, double theta);
-	void setThetaRad(int joint, double theta);
-	
-	void setTCPaLength(double l)
-	{
-		TCP.setaLength(l); 
-		
-		updateDHmatrices();
-		updateDHvectors();
-	}
-	
-	Eigen::Vector3d & getJointLocation(int joint);
-	Eigen::Vector3d & getTCPlocation()
-	{
-		return TCP.getLocation();
-	}
-	Eigen::Matrix4d & getJointDHmatrix(int joint);
-	Eigen::Vector3d & getJointZinGlobal(int joint);
-	
-	int getDOF()
-	{
-		return DOF;
-	}
-	
-	double getJointThetaRad(int joint)
-	{
-		return joints[joint]->getTheta();
-	}
-	
-	void addJointServoMinMax(int joint, int min, int max)
-	{
-		joints[joint]->addServoMinMax(min, max);
-	}
-	
-	
-	void setJointConversionMinMax(int joint, int min, int max)
-	{
-		joints[joint]->setConversionMinMaxDeg(min, max);
-	}
-	
-	int getJointConversionMin(int joint);
-	int getJointConversionMax(int joint);
-	
-	void setJointConstructionMinMax(int joint, int min, int max)
-	{
-		joints[joint]->setConstructionMinMaxDeg(min, max);
-	}
-	
-	int getJointConstructionMin(int joint);
-	int getJointConstructionMax(int joint);
-	
 	void mapThetasToServos(Lista<int> & lista);
 	
 	void updateDHmatrices();
@@ -92,6 +34,39 @@ public:
 	bool jacobAlgStep(double param, int indexOfSetJoint, Eigen::Vector3d & target);
 	bool set(Eigen::Vector3d & point); // using jacobian algorithm
 	bool setRegional(Eigen::Vector3d & point); 
+	
+	
+	//////////////////////////////////////////////////////// setters & getters & adders
+	void addRegJoint(double a, double al, double dl);
+	void addLocJoint(double a, double l, double dl);
+	
+	void setThetaDeg(int joint, double theta);
+	void setThetaRad(int joint, double theta);
+	
+	void setTCPaLength(double l);
+	
+	Eigen::Vector3d & getJointLocation(int joint);
+	Eigen::Vector3d & getTCPlocation();
+	Eigen::Matrix4d & getJointDHmatrix(int joint);
+	Eigen::Vector3d & getJointZinGlobal(int joint);
+	
+	int getDOF();
+	
+	double getJointThetaRad(int joint);
+	
+	void addJointServoMinMax(int joint, int min, int max);
+	
+	void setJointConversionMinMax(int joint, int min, int max);
+	
+	int getJointConversionMin(int joint);
+	int getJointConversionMax(int joint);
+	
+	void setJointConstructionMinMax(int joint, int min, int max);
+	
+	int getJointConstructionMin(int joint);
+	int getJointConstructionMax(int joint);
+	/////////////////////////////////////////////////////////////// !setter & getters & adders
+	
 };
 
 void constrain(double & x, double min, double max);
