@@ -322,6 +322,11 @@ Eigen::Vector3d & Robot::getJointZinGlobal(int joint)
 	return joints[joint]->getZinGlobal();
 }
 
+int Robot::getJointServoAmount(int joint)
+{
+	return joints[joint]->getServoAmount();
+}
+
 //////////////////////////////////////////////////////////////////// !setters & getters & adders
 
 

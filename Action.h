@@ -128,8 +128,8 @@ public:
 class SetSingleJointAction : public BaseAction
 {
 	int joint,
-		angleDeg,
-		servoSignal;
+		angleDeg;
+	Lista<int> servoSignals;
 	
 public:
 	SetSingleJointAction();

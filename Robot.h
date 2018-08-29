@@ -65,6 +65,8 @@ public:
 	
 	int getJointConstructionMin(int joint);
 	int getJointConstructionMax(int joint);
+	
+	int getJointServoAmount(int joint);
 	/////////////////////////////////////////////////////////////// !setter & getters & adders
 	
 };

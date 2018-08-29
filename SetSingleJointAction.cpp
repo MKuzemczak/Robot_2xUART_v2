@@ -14,11 +14,7 @@ void SetSingleJointAction::calculate(Robot & robot)
 {
 	robot.setThetaDeg(joint, angleDeg);
 	
-	Lista<int> s;
-	
-	robot.mapThetasToServos(s);
-	
-	servoSignal = s[joint];
+	robot.mapThetasToServos(servoSignals);
 	
 	setCalculated();
 	resetDone();
@@ -28,16 +24,21 @@ void SetSingleJointAction::execute()
 {
 	std::string s;
 	
-	s = "D";
-	s += std::to_string(joint);
-	s += "\n";
-	s += "E";
-	s += std::to_string(servoSignal);
-	s += "\n";
+	s = "B";
+	for (int j = 0; j < servoSignals.size(); j++)
+	{
+		s += std::to_string(servoSignals[j]) + "\n";
+
+	}
+	s += "C";
+	
+	while (!flags.isSet(ARDUINO_MOV_FIN)) ;
 	
 	arduinoPort << s;
 	
 	flags.reset(ARDUINO_MOV_FIN);
+	
+	servoSignals.erase(0);
 	
 	setDone();
 	resetCalculated();
