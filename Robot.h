@@ -35,6 +35,8 @@ public:
 	bool set(Eigen::Vector3d & point); // using jacobian algorithm
 	bool setRegional(Eigen::Vector3d & point); 
 	
+	bool jacobAlgStep(double param, int startJoint, int endJoint, int setJoint, Eigen::Vector3d & target);
+	bool jacobian(Eigen::MatrixXd & jacobM, int startJoint, int endJoint, int setJoint);	
 	
 	//////////////////////////////////////////////////////// setters & getters & adders
 	void addRegJoint(double a, double al, double dl);

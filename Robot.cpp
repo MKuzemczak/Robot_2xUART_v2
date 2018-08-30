@@ -167,6 +167,100 @@ bool Robot::jacobAlgStep(double param, int indexOfSetJoint, Eigen::Vector3d & ta
 	return true;
 }
 
+bool Robot::jacobAlgStep(double param, int startJoint, int endJoint, int setJoint, Eigen::Vector3d & target)
+{
+	if (param < SMALLEST)
+	{
+		pcPort << "Error jacobAlgStep: parametr algorytmu zerowy!\n";
+		return false;
+	}
+	
+	if (setJoint < 2)
+	{
+		pcPort << "Error jacobAlgStep: nie mozna zastosowac algorytmu do przegubow nizszysch niz nr " << setJoint << "\n";
+		return false;
+	}
+	
+	if (setJoint < endJoint)
+	{
+		pcPort << "Error Robot::jacobAlgStep(...): przegub, ktorego lokalizacja jest ustawiana (setJoint) ma indeks nizszy od ostatniego ustawianego przugubu (endJoint).\n";
+		pcPort << "setJoint == " << setJoint << ", endJoint == " << endJoint << "\n";
+		return true;
+	}
+	
+	if (startJoint >= endJoint)
+	{
+		pcPort << "Error Robot::jacobAlgStep(...): poczatkowy indeks zakresu zmienianych przegubow jest wiekszy od koncowego indeksu.\n";
+		return false;
+	}
+	
+	int amount = endJoint - startJoint + 1;
+	
+	Eigen::MatrixXd jacobM(3, amount);
+	Eigen::VectorXd thetas(amount);
+	Eigen::MatrixXd invJ(amount, 3);
+	Eigen::MatrixXd mult;
+	Eigen::Vector3d subt;
+	
+	for (int i = 0; i < amount; i++)
+		thetas(i) = joints[startJoint + i]->getTheta();
+	
+	subt = TCP.getLocation() - target;
+	
+	jacobian(jacobM, startJoint, endJoint, setJoint);
+	
+	invJ = pseudoInverse(jacobM);
+	
+	mult = param * (invJ * subt);
+	
+	thetas = (thetas - mult).eval();
+	
+	for (int i = 0; i < amount; i++)
+	{
+		constrain(thetas(i), joints[i]->getConstructionMinMaxDeg()[0] * DEG_TO_RAD, joints[i]->getConstructionMinMaxDeg()[1] * DEG_TO_RAD);
+		joints[startJoint + i]->setTheta(thetas(i));
+	}
+		
+	
+	updateDHmatrices();
+	updateDHvectors();
+	
+	return true;
+}
+
+bool Robot::jacobian(Eigen::MatrixXd & jacobM, int startJoint, int endJoint, int setJoint)
+{
+	int amount = endJoint - startJoint + 1;
+	
+	if (amount != jacobM.cols()) 
+	{
+		pcPort << "jacobian: ilosc przegubow i ilosc kolumn w macierzy jakobianowej nie sa sobie rowne!\n";
+		pcPort << "Przeguby: " << (int)joints.size() << ", kolumny: " << jacobM.cols() << '\n';
+		return false;
+	}
+	
+	if (jacobM.rows() != 3)
+	{
+		pcPort << "Macierz jakobiego nie sklada sie z trzech wierszy (z wektorow 3D)!\n";
+		pcPort << "jacobM.cols(): " << jacobM.cols() << '\n';
+		return false;
+	}
+	
+	Eigen::Vector3d jToP,    // vector pointing from currently processed joint to setPoint
+					dJToP,   // rotation around Z derivative - change of jToP vector
+					setPoint = joints[setJoint]->getLocation(); 
+	//int loops = joints.size();
+	
+	for(int i = 0 ; i < amount; i++)
+	{
+		jToP = setPoint - joints[startJoint + i]->getLocation();
+		dJToP = joints[startJoint + i]->getZinGlobal().cross(jToP);
+		jacobM.col(i)	 = dJToP;
+	}
+	
+	return true;
+}
+
 bool Robot::set(Eigen::Vector3d & point)
 {
 	updateDHmatrices();
@@ -190,13 +284,14 @@ bool Robot::setRegional(Eigen::Vector3d & point)
 	
 	while ((double)(point - TCP.getLocation()).norm() > 1)
 	{
-		jacobAlgStep(1, regJoints.size(), point);
+		jacobAlgStep(1, 0, regJoints.size() - 1, joints.size() - 1, point);
 		
 #ifdef DEBUG_ROBOT
 		pcPort << "Robot::setRegional(), koniec petli\n";
 #endif // DEBUG_ROBOT
 	}
 }
+
 
 void Robot::mapThetasToServos(Lista<int> & lista)
 {

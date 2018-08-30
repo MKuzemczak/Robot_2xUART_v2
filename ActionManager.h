@@ -4,7 +4,7 @@
 #include "Action.h"
 #include "Lista.h"
 
-#define DEBUG_ACTION_MANAGER
+//#define DEBUG_ACTION_MANAGER
 
 class ActionManager
 {
