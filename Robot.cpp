@@ -205,7 +205,7 @@ bool Robot::jacobAlgStep(double param, int startJoint, int endJoint, int setJoin
 	for (int i = 0; i < amount; i++)
 		thetas(i) = joints[startJoint + i]->getTheta();
 	
-	subt = TCP.getLocation() - target;
+	subt = joints[setJoint]->getLocation() - target;
 	
 	jacobian(jacobM, startJoint, endJoint, setJoint);
 	
@@ -217,7 +217,7 @@ bool Robot::jacobAlgStep(double param, int startJoint, int endJoint, int setJoin
 	
 	for (int i = 0; i < amount; i++)
 	{
-		constrain(thetas(i), joints[i]->getConstructionMinMaxDeg()[0] * DEG_TO_RAD, joints[i]->getConstructionMinMaxDeg()[1] * DEG_TO_RAD);
+		constrain(thetas(i), joints[startJoint + i]->getConstructionMinMaxDeg()[0] * DEG_TO_RAD, joints[startJoint + i]->getConstructionMinMaxDeg()[1] * DEG_TO_RAD);
 		joints[startJoint + i]->setTheta(thetas(i));
 	}
 		
@@ -269,6 +269,28 @@ bool Robot::set(Eigen::Vector3d & point)
 	while ((double)(point - TCP.getLocation()).norm() > 1)
 	{
 		jacobAlgStep(1, joints.size() - 1, point);
+	}
+}
+
+bool Robot::set(int startJoint, int endJoint, int setJoint, Eigen::Vector3d & point)
+{
+#ifdef DEBUG_ROBOT
+	pcPort << "Robot::set(int, int, int, Eigen::Vector3d &)\n";
+#endif
+	
+	updateDHmatrices();
+	updateDHvectors();
+	
+	while ((double)(point - joints[setJoint]->getLocation()).norm() > 1)
+	{
+		jacobAlgStep(1, startJoint, endJoint, setJoint, point);
+		
+				
+#ifdef DEBUG_ROBOT
+		pcPort << "Robot::set(int, int, int, Eigen::Vector3d &), koniec petli\n";
+		pcPort << "startJoint == " << startJoint << ", endJoint == " << endJoint << ", setJoint == " << setJoint << '\n'; 
+		pcPort << joints[setJoint]->getLocation() << '\n' << point;
+#endif // DEBUG_ROBOT
 	}
 }
 
@@ -420,6 +442,15 @@ Eigen::Vector3d & Robot::getJointZinGlobal(int joint)
 int Robot::getJointServoAmount(int joint)
 {
 	return joints[joint]->getServoAmount();
+}
+
+int Robot::getRegJointsAmount()
+{
+	return regJoints.size();
+}
+int Robot::getLocJointsAmount()
+{
+	return locJoints.size();
 }
 
 //////////////////////////////////////////////////////////////////// !setters & getters & adders

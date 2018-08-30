@@ -133,7 +133,7 @@ void setActions()
 {
 	Eigen::Vector3d v0, v1;
 			
-	v0 << 50, 150, 100;
+	/*v0 << 50, 150, 100;
 	v1 << 50, 150, -100;
 	
 	manager.addStraightLineMovAction(r.getTCPlocation(), v0);
@@ -154,6 +154,13 @@ void setActions()
 	v1 << 200, 100, 200;
 	
 	manager.addStraightLineMovAction(v0, v1);
+	*/
+	
+	v0 << 183, 200, 0;
+	v1 << 183, 100, 0;
+	
+	manager.addConstTCPOrientAction(r.getTCPlocation(), v0);
+	manager.addConstTCPOrientAction(v0, v1);
 	
 #ifdef DEBUG_MAIN
 	pcPort << "koniec setActions()\n";

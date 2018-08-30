@@ -34,7 +34,7 @@ Joint::~Joint()
 void Joint::mapThetaToServo(Lista<int> & lista)
 {
 	for (int i = 0; i < servosMinMax.size(); i++)
-	{
+	{	
 		int a = (int)map(Theta, 
 			(double)angleConversionMinMaxDeg[0]*DEG_TO_RAD, 
 			(double)angleConversionMinMaxDeg[1]*DEG_TO_RAD, 

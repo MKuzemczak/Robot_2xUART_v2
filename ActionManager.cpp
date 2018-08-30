@@ -55,7 +55,8 @@ void ActionManager::nextStep()
 		if(actions.size() > 0 && actions[actionCntr]->size() > 0)
 		{
 			actions[actionCntr]->execute();
-			
+
+			pcPort << "action no. " << actionCntr << '\n';
 #ifdef DEBUG_ACTION_MANAGER
 			pcPort << "ActionManager::nextStep() : execute(), actionCntr == " << actionCntr << '\n';
 #endif // DEBUG_ACTION_MANAGER

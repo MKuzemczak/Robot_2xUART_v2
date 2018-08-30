@@ -4,7 +4,7 @@
 #include "uartCom.h"
 #include "Lista.h"
 
-//#define DEBUG_JOINT
+#define DEBUG_JOINT
 
 #define ERR_NO_LENGTH 1
 

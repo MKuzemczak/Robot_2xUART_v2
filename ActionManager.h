@@ -46,6 +46,11 @@ public:
 		actions.push_back(new ArchMovAction(start, inter, dest));
 	}
 	
+	void addConstTCPOrientAction(Eigen::Vector3d & start, Eigen::Vector3d & dest)
+	{
+		actions.push_back(new ConstTCPOrientAction(start, dest));
+	}
+	
 	bool isCheckCalculations()
 	{
 		return checkCalculations;

@@ -11,7 +11,8 @@ typedef enum
 	ARCH,
 	LOCAL_CHANGE,
 	DELAY,
-	SINGLE
+	SINGLE,
+	CONST_STRAIGHT
 } ActionType;
 
 
@@ -137,4 +138,22 @@ public:
 	
 	virtual void calculate(Robot & robot);
 	virtual void execute();
+};
+
+class ConstTCPOrientAction : public BaseAction
+{
+	Eigen::Vector3d starting,
+					destination;
+	
+	Lista<Lista<int>> pathInServoDegs;
+	
+public:
+	ConstTCPOrientAction(Eigen::Vector3d start, Eigen::Vector3d dest);
+	~ConstTCPOrientAction();
+	
+	virtual void calculate(Robot & robot);
+	virtual void execute();
+	
+	void lerp(Lista<Eigen::Vector3d> & path);
+	virtual int size();
 };

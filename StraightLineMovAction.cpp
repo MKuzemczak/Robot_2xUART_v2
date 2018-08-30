@@ -96,40 +96,7 @@ void StraightLineMovAction::execute()
 		setDone();
 		resetCalculated();
 	}
-	
-	//
-	
-	
-	
-	/*
-	for (int i = 0; i < pathInServoDegs.size(); i++)
-	{
-		s = "B";
 		
-		for (int j = 0; j < pathInServoDegs[i].size(); j++)
-		{
-			s += std::to_string(pathInServoDegs[i][j]) + "\n";
-
-#ifdef DEBUG_STRAIGHT_LINE_ACTION
-			pcPort << pathInServoDegs[i][j] << " ";	  
-#endif // DEBUG_STRAIGHT_LINE_ACTION
-
-		}
-		
-		s += 'C';	
-		
-#ifdef DEBUG_STRAIGHT_LINE_ACTION
-		pcPort << '\n';
-#endif
-
-		
-		while (!flags.isSet(ARDUINO_MOV_FIN)) ;
-		
-		arduinoPort << s;
-		flags.reset(ARDUINO_MOV_FIN);
-			
-	}*/
-	
 }
 	
 void StraightLineMovAction::lerp(Lista<Eigen::Vector3d> & path)

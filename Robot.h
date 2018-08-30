@@ -33,6 +33,7 @@ public:
 	bool jacobian(Eigen::MatrixXd & jacobM, int indexOfSetJoint/*Lista<Joint> & joints, Eigen::Vector3d & setPoint*/);	
 	bool jacobAlgStep(double param, int indexOfSetJoint, Eigen::Vector3d & target);
 	bool set(Eigen::Vector3d & point); // using jacobian algorithm
+	bool set(int startJoint, int endJoint, int setJoint, Eigen::Vector3d & point);
 	bool setRegional(Eigen::Vector3d & point); 
 	
 	bool jacobAlgStep(double param, int startJoint, int endJoint, int setJoint, Eigen::Vector3d & target);
@@ -69,6 +70,9 @@ public:
 	int getJointConstructionMax(int joint);
 	
 	int getJointServoAmount(int joint);
+	
+	int getRegJointsAmount();
+	int getLocJointsAmount();
 	/////////////////////////////////////////////////////////////// !setter & getters & adders
 	
 };
